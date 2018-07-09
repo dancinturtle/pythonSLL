@@ -8,7 +8,6 @@ class SLL:
             runner = runner.next
         return self
     def removeLast(self):
-        print("Remove the final node in the list ")
         if self.head == None:
             return None
         if self.head.next == None:
@@ -55,10 +54,11 @@ class Node:
         self.next = None
 
 listOne = SLL()
-listOne.addNode(20)
+listOne.addNode(30).addNode(40).addNode(20).addNode(15)
 listOne.printallvalues()
 removedNode = listOne.removeLast()
-print("removeThe removed node", removedNode.val)
+if removedNode != None:
+    print("removed this node", removedNode.val)
 print("----------")
 listOne.printallvalues()
 
