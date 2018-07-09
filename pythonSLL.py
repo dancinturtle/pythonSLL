@@ -7,6 +7,25 @@ class SLL:
             print(runner.val)
             runner = runner.next
         return self
+    def removeLast(self):
+        print("Remove the final node in the list ")
+        if self.head == None:
+            return None
+        if self.head.next == None:
+            # if there is only a head, then we'll be removing the head
+            # store the node in the variable last
+            last = self.head
+            # make the list's head point to nothing
+            self.head = None
+            return last
+        # When there are more nodes after the head, we need to find the second to last node
+        runner = self.head
+        # The second to last node will have no next.next
+        while runner.next.next != None:
+            runner = runner.next
+        last = runner.next
+        runner.next = None
+        return last
     def deleteNodeTwo(self):
         if self.head != None and self.head.next != None:
             self.head.next = self.head.next.next
@@ -36,9 +55,10 @@ class Node:
         self.next = None
 
 listOne = SLL()
-listOne.addNode(20).addNode(30)
+listOne.addNode(20)
 listOne.printallvalues()
-listOne.deleteNodeTwo()
+removedNode = listOne.removeLast()
+print("removeThe removed node", removedNode.val)
 print("----------")
 listOne.printallvalues()
 
