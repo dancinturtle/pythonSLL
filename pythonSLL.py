@@ -47,6 +47,32 @@ class SLL:
             runner.next = newnode
         # regardless of whether there was a head node or not when we started this method, we should return self, which is the list. This way, we may chain methods!
         return self
+    def removal(self, val):
+        if self.head == None:
+            return None
+        # maybe we need to remove the list's head
+        if self.head.val == val:
+            guy = self.head
+            self.head = self.head.next
+            return guy
+        # travel through the list to find the node to remove
+        runner = self.head
+        # check to make sure there is something coming up after the head node
+        if runner.next == None:
+            return None
+        while runner.next.val != val:
+            runner = runner.next
+            if runner.next == None:
+            # runner got to the end of the list without finding the value to remove
+            # the value does not exist in the list, nothing to remove
+                return None
+        # if we get to the end of the while loop, that means that runner.next.val is the value we're looking for
+        # store the next node in a variable
+        guy = runner.next
+        # change the pointer of the runner
+        runner.next = runner.next.next
+        # return what we stored
+        return guy
 
 class Node:
     def __init__(self, value):
@@ -54,9 +80,9 @@ class Node:
         self.next = None
 
 listOne = SLL()
-listOne.addNode(30).addNode(40).addNode(20).addNode(15)
+listOne.addNode(30)
 listOne.printallvalues()
-removedNode = listOne.removeLast()
+removedNode = listOne.removal(20)
 if removedNode != None:
     print("removed this node", removedNode.val)
 print("----------")
