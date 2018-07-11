@@ -7,6 +7,30 @@ class SLL:
             print(runner.val)
             runner = runner.next
         return self
+    def hasLoop(self):
+        runner = self.head
+        walker = self.head
+        # edge cases: no head, or a head all by itself
+        if self.head == None or self.head.next == None:
+            return False
+        # continue as long as runner has somewhere to go
+        count = 0
+        while runner.next != None and runner.next.next != None:
+            count += 1
+            runner = runner.next.next
+            # if runner == walker:
+            #     print("first if check", count)
+            #     return True
+            walker = walker.next
+            # we found a loop if runner and walker ever meet
+            if runner == walker:
+                print("second if check", count)
+                return True
+        # when the runner has nowhere to go, then we know there is no loop
+        print("broke the while loop", count)
+        return False
+        
+
     def removeLast(self):
         if self.head == None:
             return None
@@ -80,13 +104,14 @@ class Node:
         self.next = None
 
 listOne = SLL()
-listOne.addNode(30)
-listOne.printallvalues()
-removedNode = listOne.removal(20)
-if removedNode != None:
-    print("removed this node", removedNode.val)
-print("----------")
-listOne.printallvalues()
-
-
+listOne.addNode(30).addNode(40).addNode(50).addNode(60).addNode(70).addNode(20)
+# creating a loop in listOne
+runner = listOne.head
+while runner.next!=None:
+    runner = runner.next
+runner.next = listOne.head.next.next
+print(listOne.hasLoop())
+# listTwo = SLL()
+# listTwo.addNode(30).addNode(40).addNode(7).addNode(3).addNode(15).addNode(60).addNode(17)
+# print(listTwo.hasLoop())
 
